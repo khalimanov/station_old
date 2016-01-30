@@ -16,8 +16,10 @@ def sensorname(request, sensor_id):
     return HttpResponse("You're looking at sensor {}.".format(sensor_id))
 
 
-def results(request, sensor_id):
-    return HttpResponse("You're looking at the results of sensor {}".format(sensor_id))
+def results(request):
+    values_list = Temperature.objects.all()
+    context = {'values_list': values_list}
+    return render(request, 'weather/temperature.html', context)
 
 
 @csrf_exempt

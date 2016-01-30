@@ -7,8 +7,8 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     # ex: /weather/1/
     url(r'^(?P<sensor_id>[0-9]+)/$', views.sensorname, name='sensorname'),
-    # ex: /weather/5/results/
-    url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name='results'),
-    # ex: /weather/addvalue/
+    # ex: /weather/results/
+    url(r'^results/$', views.results, name='results'),
+    # ex: /weather/addvalue/   
     url(r'^addvalue/$', views.addvalue, name='addvalue'),
 ]
