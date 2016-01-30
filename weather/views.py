@@ -2,7 +2,8 @@
 from __future__ import unicode_literals
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Sensor
+from .models import Sensor, Temperature, Humidity
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
@@ -19,7 +20,22 @@ def results(request, sensor_id):
     return HttpResponse("You're looking at the results of sensor {}".format(sensor_id))
 
 
+@csrf_exempt
 def addvalue(request):
-    if request.PUT is False:
-        return HttpResponse('request need to be PUT')
+    if request.method != 'POST':
+        return HttpResponse('request need to be POST')
+    sensor_id = request.POST.get("sensor_id", 0)
+    temp = request.POST.get('temp', 0)
+    hum = request.POST.get('hum', 0)
+    if sensor_id == 0 or hum == 0:
+        return HttpResponse('Bad info')
+    sensor = Sensor.objects.get(sensor_id_const=sensor_id)
+    new_temp = Temperature()
+    new_temp.sensor = sensor
+    new_temp.value = temp
+    new_temp.save()
+    new_hum = Humidity()
+    new_hum.sensor = sensor
+    new_hum.value = hum
+    new_hum.save()
     return HttpResponse('200 OK')

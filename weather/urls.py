@@ -10,5 +10,5 @@ urlpatterns = [
     # ex: /weather/5/results/
     url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name='results'),
     # ex: /weather/addvalue/
-    url(r'^/addvalue/$', views.addvalue, name='addvalue'),
+    url(r'^addvalue/$', views.addvalue, name='addvalue'),
 ]
