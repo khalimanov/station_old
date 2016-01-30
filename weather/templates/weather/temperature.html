@@ -1,0 +1,33 @@
+{% if values_list %}
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <title>Температура</title>
+            <style>
+                .brd {
+                    border: 1px solid black; /* Параметры границы */
+                    border-collapse: collapse;
+                }
+            </style>
+        </head> 
+        <body>
+            <p> Температура </p>
+            <table class="brd" border = "1">
+                <tr>
+                    <th>Код</th>
+                    <th>Дата</th>
+                    <th>Температура</th>
+                </tr>
+                {% for value in values_list %}
+                    <tr>
+                        <td align="right">{{ value.sensor }}</td>
+                        <td>{{ value.date }}</td>
+                        <td>{{ value.value }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </body>
+    </html>
+{% else %}
+    <p> No sensors in database </p>
+{% endif %}
